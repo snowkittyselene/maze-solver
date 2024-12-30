@@ -23,7 +23,7 @@ class Window:
     def close(self):
         self.__running = False
 
-    def draw_line(self, line, fill_color):
+    def draw_line(self, line, fill_color="black"):
         line.draw(self.__canvas, fill_color)
 
 
@@ -81,13 +81,13 @@ class Cell:
     def draw(self):
         # Draw left wall
         if self.has_left_wall:
-            self._win.draw_line(self._left_wall, "black")
+            self._win.draw_line(self._left_wall)
         # Draw right wall
         if self.has_right_wall:
-            self._win.draw_line(self._right_wall, "black")
+            self._win.draw_line(self._right_wall)
         # Draw top wall
         if self.has_top_wall:
-            self._win.draw_line(self._top_wall, "black")
+            self._win.draw_line(self._top_wall)
         # Draw bottom wall
         if self.has_bottom_wall:
-            self._win.draw_line(self._bottom_wall, "black")
+            self._win.draw_line(self._bottom_wall)
