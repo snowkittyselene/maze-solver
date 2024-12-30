@@ -1,9 +1,20 @@
-from graphics import Window, Line, Point
+from maze import Maze
+from graphics import Window
 
 
 def main():
     # Set up window
-    win = Window(800, 600)
+    margin = 50
+    screen_x = 800
+    screen_y = 600
+    num_rows = 12
+    num_cols = 16
+    cell_size_x = (screen_x - 2 * margin) / num_cols
+    cell_size_y = (screen_y - 2 * margin) / num_rows
+
+    win = Window(screen_x, screen_y)
+    maze = Maze(margin, margin, num_rows, num_cols, cell_size_x, cell_size_y, win)
+
     # Set up window to wait for close
     win.wait_for_close()
 
