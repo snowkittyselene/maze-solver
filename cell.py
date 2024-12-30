@@ -30,15 +30,23 @@ class Cell:
         # Draw left wall
         if self.has_left_wall:
             self._win.draw_line(self._left_wall)
+        else:
+            self._win.draw_line(self._left_wall, "white")
         # Draw right wall
         if self.has_right_wall:
             self._win.draw_line(self._right_wall)
+        else:
+            self._win.draw_line(self._right_wall, "white")
         # Draw top wall
         if self.has_top_wall:
             self._win.draw_line(self._top_wall)
+        else:
+            self._win.draw_line(self._top_wall, "white")
         # Draw bottom wall
         if self.has_bottom_wall:
             self._win.draw_line(self._bottom_wall)
+        else:
+            self._win.draw_line(self._bottom_wall, "white")
 
     # Draws a line between the center of two cells
     def draw_move(self, to_cell, undo=False):
