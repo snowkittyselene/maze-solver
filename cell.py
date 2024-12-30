@@ -2,34 +2,29 @@ from graphics import Line, Point
 
 
 class Cell:
-    def __init__(
-        self,
-        top_left,
-        bottom_right,
-        window,
-        left=True,
-        right=True,
-        top=True,
-        bottom=True,
-    ):
+    def __init__(self, win):
         # What walls does the cell have?
-        self.has_left_wall = left
-        self.has_right_wall = right
-        self.has_top_wall = top
-        self.has_bottom_wall = bottom
-        # Set points for line makeup
-        self._x1 = top_left.x
-        self._y1 = top_left.y
-        self._x2 = bottom_right.x
-        self._y2 = bottom_right.y
-        self._win = window
+        self.has_left_wall = True
+        self.has_right_wall = True
+        self.has_top_wall = True
+        self.has_bottom_wall = True
+        # Set points for when drawing
+        self._x1 = None
+        self._y1 = None
+        self._x2 = None
+        self._y2 = None
+
+        self._win = win
+
+    def draw(self, x1, y1, x2, y2):
+        # Set up points
+        self._x1, self._y1, self._x2, self._y2 = x1, y1, x2, y2
         # Define walls
         self._left_wall = Line(Point(self._x1, self._y1), Point(self._x1, self._y2))
         self._right_wall = Line(Point(self._x2, self._y1), Point(self._x2, self._y2))
         self._top_wall = Line(Point(self._x1, self._y1), Point(self._x2, self._y1))
         self._bottom_wall = Line(Point(self._x1, self._y2), Point(self._x2, self._y2))
-
-    def draw(self):
+        self.center = Point((self._x1 + self._x2) // 2, (self._y1 + self._y2) // 2)
         # Draw left wall
         if self.has_left_wall:
             self._win.draw_line(self._left_wall)
@@ -42,3 +37,9 @@ class Cell:
         # Draw bottom wall
         if self.has_bottom_wall:
             self._win.draw_line(self._bottom_wall)
+
+    # Draws a line between the center of two cells
+    def draw_move(self, to_cell, undo=False):
+        color = "gray" if undo else "red"
+        center_line = Line(self.center, to_cell.center)
+        self._win.draw_line(center_line, color)
